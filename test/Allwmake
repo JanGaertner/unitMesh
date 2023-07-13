@@ -1,0 +1,72 @@
+#!/bin/bash
+#------------------------------------------------------------------------------- 
+#
+#License
+#    This file is part of mmcFoam.
+#
+#    mmcFoam is free software: you can redistribute it and/or modify it
+#    under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    mmcFoam is distributed in the hope that it will be useful, but 
+#    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+#    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+#    for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with  mmcFoam.  If not, see <http://www.gnu.org/licenses/>.
+#
+#Description
+#    Script to build the test executable
+#
+#Author
+#    Jan Wilhelm Gärtner <jan.gaertner@outlook.de> Copyright (C) 2022
+#
+#*---------------------------------------------------------------------------*/
+
+
+set -e
+
+
+#======================================================================
+# Compile and Install Catch2
+#======================================================================
+# Compile the Catch2 library into a static libray
+
+# if Catch2_install exist do not reinstall
+if [[ ! -d "Catch2_install" ]]; then 
+    if [[ -d "Catch2_build" ]]; then
+        rm -r Catch2_build
+    fi
+
+    mkdir Catch2_build
+
+    cmake -S ./Catch2 -B Catch2_build -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=${MMC_PROJECT_USER_DIR}/tests/unitTests/Catch2_install
+
+
+    if [ __cmake_version_above ]; then 
+        cmake --build Catch2_build --parallel --target install
+    else
+        cmake --build Catch2_build --target install
+    fi
+
+    # clean up
+    rm -r Catch2_build
+fi
+#======================================================================
+# Compile Test Cases
+#======================================================================
+
+
+cd src/
+
+# Build the tests
+wmake -j -debug 
+
+
+#======================================================================
+# Unwind
+#======================================================================
+
+
