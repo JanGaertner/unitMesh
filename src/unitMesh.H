@@ -42,18 +42,44 @@ SourceFiles
 
 #include "fvMesh.H"
 
+namespace Foam
+{
 
 class unitMesh
 {
+    private:
 
+        //- Pointer to store the unit mesh
+        autoPtr<fvMesh> mesh_;
+
+        //- Default system dictionary to read for runTime
+        dictionary systemDict_;
+
+        //- Store a time object as a new objectRegistry
+        autoPtr<Time> runTime_;
+
+        //- Create the Time object and object registry
+        void createObjectRegistry(const fileName& rootPath);
 
 
     public:
 
         //- Construct a unit mesh with nCells in each dimension 
-        unitMesh(const label& nCells);
+        unitMesh
+        (
+            const label& nCells,
+            const fileName& rootPath="./"
+        );
+
+    // Access
+
+        //- Access to the unit mesh
+        const fvMesh& mesh();
+
+        //- Access to the objectRegistry over Time
+        const Time& runTime();
 
 };
-
+}
 
 #endif

@@ -40,9 +40,11 @@ if [[ ! -d "Catch2_install" ]]; then
         rm -r Catch2_build
     fi
 
+    CURR_DIR=$(pwd)
+
     mkdir Catch2_build
 
-    cmake -S ./Catch2 -B Catch2_build -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=${MMC_PROJECT_USER_DIR}/tests/unitTests/Catch2_install
+    cmake -S ./Catch2 -B Catch2_build -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=${CURR_DIR}/Catch2_install
 
 
     if [ __cmake_version_above ]; then 
@@ -54,6 +56,14 @@ if [[ ! -d "Catch2_install" ]]; then
     # clean up
     rm -r Catch2_build
 fi
+#======================================================================
+# Compile Library
+#======================================================================
+
+cd ../src/
+wmake 
+cd ../test/
+
 #======================================================================
 # Compile Test Cases
 #======================================================================
