@@ -5,9 +5,6 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2011-2016 OpenFOAM Foundation
-    Copyright (C) 2019 OpenCFD Ltd.
--------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
  
@@ -32,6 +29,9 @@ Description
  
 SourceFiles
     unitMesh.C
+
+Author
+    Jan Wilhelm Gärtner <jan.gaertner@outlook.de> Copyright (C) 2023
  
 \*---------------------------------------------------------------------------*/
 

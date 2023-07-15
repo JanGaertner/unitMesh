@@ -1,13 +1,10 @@
 /*---------------------------------------------------------------------------*\
-                                       8888888888                              
-                                       888                                     
-                                       888                                     
-  88888b.d88b.  88888b.d88b.   .d8888b 8888888  .d88b.   8888b.  88888b.d88b.  
-  888 "888 "88b 888 "888 "88b d88P"    888     d88""88b     "88b 888 "888 "88b 
-  888  888  888 888  888  888 888      888     888  888 .d888888 888  888  888 
-  888  888  888 888  888  888 Y88b.    888     Y88..88P 888  888 888  888  888 
-  888  888  888 888  888  888  "Y8888P 888      "Y88P"  "Y888888 888  888  888 
-------------------------------------------------------------------------------- 
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     |
+    \\  /    A nd           | www.openfoam.com
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
 
 License
     This file is part of mmcFoam.
@@ -26,10 +23,10 @@ License
     along with  mmcFoam.  If not, see <http://www.gnu.org/licenses/>.
 
 Description
-    Test the baseParticleDataContainer class
+    Test the unitMesh class
 
 Author
-    Jan Wilhelm Gärtner <jan.gaertner@outlook.de> Copyright (C) 2022
+    Jan Wilhelm Gärtner <jan.gaertner@outlook.de> Copyright (C) 2023
 \*---------------------------------------------------------------------------*/
 
 #include <catch2/catch_session.hpp> 
