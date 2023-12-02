@@ -137,6 +137,8 @@ Foam::unitMesh::unitMesh
     // Construction of the boundary faces
     // ========================================================================
 
+    const label startIndexBoundaryFaces = ind;
+
     // Faces along the x direction
     label xInd = 0;
     for (label zInd=0; zInd < nCells; zInd++)
@@ -253,13 +255,23 @@ Foam::unitMesh::unitMesh
             false       // Do not sync
         )
     );
+
+    addBoundaries(nCells,startIndexBoundaryFaces);
 }
 
 
 void Foam::unitMesh::createObjectRegistry(const fileName& rootPath)
 {
-    systemDict_.getOrAdd<scalar>("deltaT",1);
-    systemDict_.getOrAdd<scalar>("writeFrequency",1);
+    IStringStream is
+    (
+        "deltaT          1;"
+        "writeFrequency  1;"
+        "DebugSwitches"
+        "{"
+        "    polyMesh    1;"
+        "}"
+    );
+    systemDict_.read(is);
     runTime_.reset(
         new Time
         (
@@ -270,6 +282,35 @@ void Foam::unitMesh::createObjectRegistry(const fileName& rootPath)
             "constant"   
         )
     );
+}
+
+
+void Foam::unitMesh::addBoundaries
+(
+    const label nCells,
+    const label startIndex
+)
+{
+    List<polyPatch*> pList(6,nullptr);
+
+    wordList patchNames = {"left","front","bottom","right","back","top"};
+
+    const label patchSize = nCells*nCells;
+
+    forAll(patchNames,i)
+    {
+        // Create a list of 6 patches
+        pList[i] = new polyPatch
+        (
+            "top",
+            patchSize,
+            startIndex + i*patchSize,
+            i,
+            mesh().boundaryMesh(),
+            "calculated"
+        );
+    }
+    mesh_.ref().addFvPatches(pList);
 }
 
 

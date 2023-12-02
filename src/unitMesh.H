@@ -61,6 +61,12 @@ class unitMesh
         //- Create the Time object and object registry
         void createObjectRegistry(const fileName& rootPath);
 
+        //- Add boundaries
+        void addBoundaries
+        (
+            const label nCells,
+            const label startIndex
+        );
 
     public:
 
