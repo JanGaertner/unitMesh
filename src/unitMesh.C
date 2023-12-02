@@ -266,10 +266,6 @@ void Foam::unitMesh::createObjectRegistry(const fileName& rootPath)
     (
         "deltaT          1;"
         "writeFrequency  1;"
-        "DebugSwitches"
-        "{"
-        "    polyMesh    1;"
-        "}"
     );
     systemDict_.read(is);
     runTime_.reset(
@@ -302,7 +298,7 @@ void Foam::unitMesh::addBoundaries
         // Create a list of 6 patches
         pList[i] = new polyPatch
         (
-            "top",
+            patchNames[i],
             patchSize,
             startIndex + i*patchSize,
             i,
