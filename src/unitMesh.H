@@ -59,7 +59,11 @@ class unitMesh
         autoPtr<Time> runTime_;
 
         //- Create the Time object and object registry
-        void createObjectRegistry(const fileName& rootPath);
+        void createObjectRegistry
+        (
+            const fileName& rootPath,
+            const word& caseName
+        );
 
         //- Add boundaries
         void addBoundaries
@@ -74,7 +78,8 @@ class unitMesh
         unitMesh
         (
             const label& nCells,
-            const fileName& rootPath="./"
+            const fileName& rootPath="./",
+            const word& caseName=""
         );
 
     // Access

@@ -8,6 +8,10 @@ cubed, structured mesh with $n^3$ cells is created without any IO calls.
 Further, the library provides an independent object registry for creation 
 of GeometricFields.
 
+## Compilation
+
+Source your OpenFOAM environment and execute `wmake` in the `src` folder
+
 ## Usage
 
 ```c++
@@ -22,7 +26,9 @@ int main()
     // Optional: provide a path to where objects are written if write()
     //           is called. (Defaults to: rootPath='./')
     fileName rootPath = "PATH_TO_MY_TESTS";
-    unitMesh uMesh(10,rootPath);
+    // Optional case name. By default empty
+    word caseName;
+    unitMesh uMesh(10,rootPath,caseName);
     
     // Get the mesh
     const fvMesh& mesh = uMesh.mesh();

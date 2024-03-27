@@ -28,12 +28,13 @@ License
 Foam::unitMesh::unitMesh
 (
     const label& nCells,
-    const fileName& rootPath    
+    const fileName& rootPath,
+    const word& caseName
 )
 {
 
     // Create object registry
-    createObjectRegistry(rootPath);
+    createObjectRegistry(rootPath,caseName);
 
     // Create cells and faces
     pointField points(std::pow(nCells+1,3));
@@ -260,7 +261,11 @@ Foam::unitMesh::unitMesh
 }
 
 
-void Foam::unitMesh::createObjectRegistry(const fileName& rootPath)
+void Foam::unitMesh::createObjectRegistry
+(
+    const fileName& rootPath,
+    const word& caseName
+)
 {
     IStringStream is
     (
@@ -273,7 +278,7 @@ void Foam::unitMesh::createObjectRegistry(const fileName& rootPath)
         (
             systemDict_,
             rootPath,
-            "case/",
+            caseName,
             "system",
             "constant"   
         )
